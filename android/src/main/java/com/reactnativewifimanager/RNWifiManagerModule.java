@@ -42,7 +42,7 @@ public class RNWifiManagerModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getConfiguredNetworks(Callback callBack, Callback errorCallBack) {
         try {
-            wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             List<WifiConfiguration> configuredNetworks = wifiManager.getConfiguredNetworks();
             
             JSONArray callArray = new JSONArray();
