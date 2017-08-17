@@ -1,0 +1,11 @@
+{
+  "name": "react-native-wifi-manager",
+  "version": "0.0.1",
+  "description": "Wifi manager for react native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+  "author": "Mark Allan B. Meriales"
+}
