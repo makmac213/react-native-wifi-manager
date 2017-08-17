@@ -48,7 +48,17 @@ public class RNWifiManagerModule extends ReactContextBaseJavaModule {
             JSONArray callArray = new JSONArray();
             for (WifiConfiguration configuredNetwork : configuredNetworks) {
                 JSONObject callObj = new JSONObject();
-                callObj.put("configuration", configuredNetwork.toString());
+                // callObj.put("configuration", configuredNetwork.toString());
+                callObj.put("BSSID", configuredNetwork.BSSID);
+                callObj.put("FQDN", configuredNetwork.FQDN);
+                callObj.put("SSID", configuredNetwork.SSID);
+                callObj.put("allowedAuthAlgorithms", configuredNetwork.allowedAuthAlgorithms.toString());
+                callObj.put("allowedGroupCiphers", configuredNetwork.allowedGroupCiphers.toString());
+                callObj.put("allowedKeyManagement", configuredNetwork.allowedKeyManagement.toString());
+                callObj.put("allowedPairwiseCiphers", configuredNetwork.allowedPairwiseCiphers.toString());
+                callObj.put("allowedProtocols", configuredNetwork.allowedProtocols.toString());
+                callObj.put("networkId", configuredNetwork.networkId);
+                callObj.put("raw", configuredNetwork.toString());
                 callArray.put(callObj);
             }
 
