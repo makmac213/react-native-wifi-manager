@@ -1,4 +1,4 @@
-package com.reactnativecallhistory;
+package com.reactnativewifimanager;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.NativeModule;
@@ -9,12 +9,14 @@ import com.facebook.react.bridge.ReactMethod;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 
 import java.lang.StringBuffer;
 import java.util.Date;
+import java.util.List;
 
 import org.json.*;
 
@@ -40,12 +42,12 @@ public class RNWifiManagerModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getConfiguredNetworks(Callback callBack, Callback errorCallBack) {
         try {
-            wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+            wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             List<WifiConfiguration> configuredNetworks = wifiManager.getConfiguredNetworks();
             
             JSONArray callArray = new JSONArray();
             for (WifiConfiguration configuredNetwork : configuredNetworks) {
-                JSONObject callObj = new JSON();
+                JSONObject callObj = new JSONObject();
                 callObj.put("configuration", configuredNetwork.toString());
                 callArray.put(callObj);
             }
