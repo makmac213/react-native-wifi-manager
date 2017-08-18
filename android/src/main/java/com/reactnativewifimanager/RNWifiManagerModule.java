@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReactMethod;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -46,10 +47,11 @@ public class RNWifiManagerModule extends ReactContextBaseJavaModule {
     public void getAllNetworks(Callback callBack, Callback errorCallBack) {
         try {
             connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo[] networkInfos = connectivityManager.getAllNetworks();
+            Network[] networks = connectivityManager.getAllNetworks();
 
             JSONArray callArray = new JSONArray();
-            for (NetworkInfo networkInfo : networkInfos) {
+            for (NetworkInfo network : networks) {
+                NetworkInfo networkInfo = new NetworkInfo(network);
                 JSONObject callObj = new JSONObject();
                 callObj.put("Info", networkInfo.toString());
                 callArray.put(callObj);
