@@ -56,7 +56,7 @@ public class RNWifiManagerModule extends ReactContextBaseJavaModule {
                 callObj.put("Info", networkInfo.toString());
                 callArray.put(callObj);
             }
-            callBack.put(callArray.toString());
+            callBack.invoke(callArray.toString());
         } catch(Exception e) {
             errorCallBack.invoke(e.getMessage());
         }
