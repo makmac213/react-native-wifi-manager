@@ -50,13 +50,13 @@ public class RNWifiManagerModule extends ReactContextBaseJavaModule {
             Network[] networks = connectivityManager.getAllNetworks();
 
             JSONArray callArray = new JSONArray();
-            for (NetworkInfo network : networks) {
-                NetworkInfo networkInfo = new NetworkInfo(network);
+            for (Network network : networks) {
+                NetworkInfo networkInfo = connectivityManager.getNetworkInfo(network);
                 JSONObject callObj = new JSONObject();
                 callObj.put("Info", networkInfo.toString());
                 callArray.put(callObj);
             }
-            callBack.put(callArray.toString);
+            callBack.put(callArray.toString());
         } catch(Exception e) {
             errorCallBack.invoke(e.getMessage());
         }
