@@ -9,6 +9,8 @@ import com.facebook.react.bridge.ReactMethod;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.provider.CallLog;
@@ -23,6 +25,7 @@ import org.json.*;
 public class RNWifiManagerModule extends ReactContextBaseJavaModule {
 
     WifiManager wifiManager;
+    ConnectivityManager connectivityManager;
     
     private static final String TAG = RNWifiManagerModule.class.getSimpleName();
 
@@ -37,6 +40,24 @@ public class RNWifiManagerModule extends ReactContextBaseJavaModule {
     @Override
     public String getName() {
         return "WifiManager";
+    }
+
+    @ReactMethod
+    public void getAllNetworks(Callback callBack, Callback errorCallBack) {
+        try {
+            connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo[] networkInfos = connectivityManager.getAllNetworks();
+
+            JSONArray callArray = new JSONArray();
+            for (NetworkInfo networkInfo : networkInfos) {
+                JSONObject callObj = new JSONObject();
+                callObj.put("Info", networkInfo.toString());
+                callArray.put(callObj);
+            }
+            callBack.put(callArray.toString);
+        } catch(Exception e) {
+            errorCallBack.invoke(e.getMessage());
+        }
     }
 
     @ReactMethod
